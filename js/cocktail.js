@@ -1,6 +1,6 @@
 // ** load drink data 
 
-const loaddrinkData = async (searchText)=>{
+const loaddrinkData = async (searchText,dataLimit)=>{
     try {
 
         if (searchText) {
@@ -10,7 +10,7 @@ const loaddrinkData = async (searchText)=>{
                 const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchText}`);
                 response.ok ? console.log('Successfull') : console.log('Failed')
                 const data = await response.json();
-                drinkDisplay(data);
+                drinkDisplay(data,dataLimit);
                 document.getElementById('no-data').classList.add('d-none')
             } else{
                 document.getElementById('no-data').classList.remove('d-none')
@@ -20,7 +20,8 @@ const loaddrinkData = async (searchText)=>{
                 const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`);
                 response.ok ? console.log('Successfull') : console.log('Failed')
                 const data = await response.json();
-                drinkDisplay(data);
+                drinkDisplay(data,dataLimit);
+                document.getElementById('no-data').classList.add('d-none')
         }
 
         
@@ -32,15 +33,24 @@ const loaddrinkData = async (searchText)=>{
 
 // ** Display drink data
 
-const drinkDisplay = data => {
+const drinkDisplay = (data,dataLimit) => {
     // ** drink data where to display
     const drinkContainer = document.getElementById('drink-display');
     drinkContainer.textContent = '';
 
-    const {drinks} = data;
-    drinks === null && document.getElementById('no-data').classList.remove('d-none')
-    
+    let {drinks} = data;
+    drinks === null && document.getElementById('no-data').classList.remove('d-none')  
+    // console.log(drinks.length)
 
+    if (drinks.length > dataLimit && dataLimit) {
+        document.getElementById('show-all').classList.remove('d-none')
+        drinks = drinks.slice(0,dataLimit);
+    } else{
+        document.getElementById('show-all').classList.add('d-none')
+        // console.log(drinks)
+    }
+    console.log(drinks.length)
+    
     drinks.forEach(drink => {
         const {idDrink,strDrinkThumb,dateModified,strAlcoholic,strGlass,strCategory,strInstructions,strDrink} = drink;
         const drinkContent = document.createElement('div');
@@ -75,7 +85,7 @@ const drinkDisplay = data => {
 document.getElementById('button-addon2').addEventListener('click',()=>{
     // ** search input value get
     const searchValue = inputFieldValue('search-input');
-    loaddrinkData(searchValue);
+    loaddrinkData(searchValue,4);
 
 });
 
@@ -83,7 +93,7 @@ document.getElementById('button-addon2').addEventListener('click',()=>{
 
 document.getElementById('search-input').addEventListener('keypress',(event)=>{
     const searchValue = inputFieldValue('search-input');
-    event.key === 'Enter' &&  loaddrinkData(searchValue) ;
+    event.key === 'Enter' &&  loaddrinkData(searchValue,4) ;
     // loaddrinkData(searchValue)
 })
 
@@ -99,6 +109,12 @@ const sppinerToggler = (isSpining)=>{
 // ** data loaded
 loaddrinkData()
 
+// ** Show All button functionality
+
+document.getElementById('show-all-button').addEventListener('click',()=>{
+    const searchValue = inputFieldValue('search-input');
+    loaddrinkData(searchValue);
+})
 
 // ** 1.sppiner
 // ** 2. 20 ta kore data show kora
