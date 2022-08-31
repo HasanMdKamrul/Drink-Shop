@@ -37,6 +37,10 @@ const drinkDisplay = data => {
             <h3 class="card-title">${strDrink}</h3>
             <h2 class="card-title text-danger">${strAlcoholic}</h2>
             <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <small class='text-info'>Drink Type:${strCategory}</small>
+            <footer class='text-success'>
+                Date:<span class='text-primary'> ${new Date(dateModified).toLocaleDateString()}</span>
+            </footer>
         </div>
         
         `;
