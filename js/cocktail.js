@@ -18,10 +18,12 @@ const drinkDisplay = data => {
 
     const drinkContainer = document.getElementById('drink-display');
 
+    drinkContainer.textContent = '';
+
     const {drinks} = data;
 
     drinks.forEach(drink => {
-        const {idDrink,strDrinkThumb,dateModified,strAlcoholic,strDrink,strCategory} = drink;
+        const {idDrink,strDrinkThumb,dateModified,strAlcoholic,strDrink,strCategory,strInstructions} = drink;
 
         console.log(strDrinkThumb)
 
@@ -35,9 +37,9 @@ const drinkDisplay = data => {
         <img src="${strDrinkThumb ? strDrinkThumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Klassiche_Margarita.jpg/400px-Klassiche_Margarita.jpg?20120724204522'}" class="card-img-top img-fluid" alt="...">
         <div class="card-body">
             <h3 class="card-title">${strDrink}</h3>
-            <h2 class="card-title text-danger">${strAlcoholic}</h2>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <small class='text-info'>Drink Type:${strCategory}</small>
+            <h2 class="card-title text-danger">${strAlcoholic ? strAlcoholic : 'N/A'}</h2>
+            <p class="card-text">${strInstructions ? strInstructions.slice(0,10) : 'No Instructions given'}</p>
+            <small class='text-info'>Drink Type:${strCategory ? strCategory : 'N/A' }</small>
             <footer class='text-success'>
                 Date:<span class='text-primary'> ${new Date(dateModified).toLocaleDateString()}</span>
             </footer>
@@ -47,7 +49,18 @@ const drinkDisplay = data => {
 
         drinkContainer.appendChild(drinkContent)
     })
-}
+};
+
+// ** search button implimentation
+
+document.getElementById('button-addon2').addEventListener('click',()=>{
+    // ** search input value get
+    const searchInputValue = inputFieldValue('search-input');
+    loaddrinkData(searchInputValue)
+   
+});
+
+// ** Search input enter functionality
 
 // ** data loaded
-loaddrinkData('Mojito')
+// loaddrinkData('Mojito')

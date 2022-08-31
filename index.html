@@ -28,6 +28,26 @@
       </h1>
     </header>
     <main class="container">
+      <!-- ** Search bar -->
+      <section class="container my-5">
+        <div class="input-group mb-3">
+          <input
+            id="search-input"
+            type="text"
+            class="form-control text-primary"
+            placeholder="Search your drink ..."
+            aria-label=""
+            aria-describedby="button-addon2"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+          >
+            Search
+          </button>
+        </div>
+      </section>
       <section>
         <div class="row row-cols-1 row-cols-md-4 g-4" id="drink-display"></div>
       </section>
@@ -39,6 +59,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- ** Custon script -->
+    <script src="./js/utilites.js"></script>
     <script src="./js/cocktail.js"></script>
   </body>
 </html>
