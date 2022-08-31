@@ -53,11 +53,12 @@ const drinkDisplay = (data,dataLimit) => {
     // console.log(drinks.length)
 
     if (drinks.length > dataLimit && dataLimit) {
-        document.getElementById('show-all').classList.remove('d-none')
+        document.getElementById('show-all').classList.remove('d-none');
+        document.getElementById('show-less').classList.add('d-none')
         drinks = drinks.slice(0,dataLimit);
     } else{
         document.getElementById('show-all').classList.add('d-none')
-        // console.log(drinks)
+        document.getElementById('show-less').classList.remove('d-none')
     }
     console.log(drinks.length)
     
@@ -124,6 +125,11 @@ loaddrinkData()
 document.getElementById('show-all-button').addEventListener('click',()=>{
     const searchValue = inputFieldValue('search-input');
     loaddrinkData(searchValue);
+})
+// ** Show less Button
+document.getElementById('show-less-button').addEventListener('click',()=>{
+    const searchValue = inputFieldValue('search-input');
+    loaddrinkData(searchValue,4);
 })
 
 // ** 1.sppiner
