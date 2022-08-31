@@ -14,6 +14,7 @@ const loaddrinkData = async (searchText,dataLimit)=>{
                 document.getElementById('no-data').classList.add('d-none')
             } else{
                 document.getElementById('no-data').classList.remove('d-none')
+                
             }
         } else {
                 sppinerToggler(true)
@@ -39,7 +40,16 @@ const drinkDisplay = (data,dataLimit) => {
     drinkContainer.textContent = '';
 
     let {drinks} = data;
-    drinks === null && document.getElementById('no-data').classList.remove('d-none')  
+
+    if (drinks === null) {
+        document.getElementById('no-data').classList.remove('d-none');
+        sppinerToggler(false)
+    } else{
+        document.getElementById('no-data').classList.add('d-none');
+        sppinerToggler(true)
+    }
+
+    // drinks === null && 
     // console.log(drinks.length)
 
     if (drinks.length > dataLimit && dataLimit) {
