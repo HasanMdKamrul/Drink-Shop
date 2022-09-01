@@ -73,7 +73,7 @@ const drinkDisplay = (data,dataLimit) => {
 
         drinkContent.classList.add('col');
         drinkContent.innerHTML = `
-        <div class="card h-full shadow-lg">
+        <div class="card h-full shadow-lg rounded-3">
         <img src="${strDrinkThumb ? strDrinkThumb : 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Klassiche_Margarita.jpg/400px-Klassiche_Margarita.jpg?20120724204522'}" class="card-img-top img-fluid" alt="...">
         <div class="card-body">
             <h3 class="card-title">${strGlass ? strGlass : strDrink}</h3>
